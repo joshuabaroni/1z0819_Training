@@ -1,7 +1,7 @@
-package a;
+package packages_and_imports.a;
 
-//import java.lang.Number; // not only is this unnecessary, but number becomes a defined entity so we can't make a locally defined class called number
-import java.lang.*; // unnecessary, but doesn't create a conflict with the classname
+//import java.lang.Number; // not only is this unnecessary, but number becomes packages_and_imports.a defined entity so we can't make packages_and_imports.a locally defined class called number
+import java.lang.*; // unnecessary, but doesn't create packages_and_imports.a conflict with the classname
 
 public class Number {
     Number number; // you can name your class the same name as another declared class.
@@ -15,7 +15,7 @@ public class Number {
 
     Number(Number number) {
         this.number = number;
-        System.out.println("Constructor for a.Number");
+        System.out.println("Constructor for packages_and_imports.a.Number");
     }
 
     public static void main(String[] args) {

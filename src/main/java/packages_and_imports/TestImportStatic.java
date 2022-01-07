@@ -1,3 +1,5 @@
+package packages_and_imports;
+
 import static java.lang.Math.PI;
 import static java.lang.Math.sqrt;
 // single static import declarations for static method and variable
