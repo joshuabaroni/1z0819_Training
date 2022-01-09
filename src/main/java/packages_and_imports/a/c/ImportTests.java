@@ -1,11 +1,9 @@
-package a.c;
+package packages_and_imports.a.c;
 
 import java.lang.*; // this is redundant but OK, always included
 
-import a.b.PackageTests.*; // this means nothing because PackageTests is not a package
-import a.b.PackageTests;
-import a.c.ImportTests; // this is redundant but OK, code will compile
-import a.*; // includes classes defined in a but not a.b or a.c
+import packages_and_imports.a.b.PackageTests;
+import packages_and_imports.a.*; // includes classes defined in packages_and_imports.a but not packages_and_imports.a.b or packages_and_imports.a.c
 
 public class ImportTests {
     public static void main(String[] args) {

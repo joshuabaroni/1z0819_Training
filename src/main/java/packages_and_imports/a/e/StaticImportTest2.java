@@ -1,4 +1,4 @@
-package a.e;
+package packages_and_imports.a.e;
 
 public class StaticImportTest2 {
 

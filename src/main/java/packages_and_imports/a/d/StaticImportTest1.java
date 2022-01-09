@@ -1,4 +1,4 @@
-package a.d;
+package packages_and_imports.a.d;
 
 public class StaticImportTest1 {
 
