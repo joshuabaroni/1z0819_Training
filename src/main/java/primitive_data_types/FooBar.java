@@ -32,7 +32,6 @@ public class FooBar {
             default:
                 r = 3;
         }
-
         System.out.println("r is " + r); // r is now fully init, since all switch outcomes set r
     }
 }
