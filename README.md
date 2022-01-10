@@ -137,6 +137,7 @@
 * The data value of packages_and_imports.a primitive is stored in memory directly and is not packages_and_imports.a location reference to the data
 * This makes accessing primitive data types faster and leads to more efficient performance
 * Unlike C#, primitives are not objects (C# is strictly OOP, while Java uses primitives to optimize where needed)
+
 ### 8 primitive data types
 * 8 main primitives in Java
 * byte, char, short, int, and long are in 2's complement format (leftmost bit is +/-)
@@ -180,3 +181,24 @@
 | char | '\n' | (escape chars with '\\' - represents line feed)
 | boolean | true | --
 | boolean | false | --
+
+### Suffix and Prefix Modifiers
+* in some cases, numeric literals will have a suffix
+* valid suffixes exist for *long*, *float*, and *double* and the case of the suffix does not matter
+* this forces the literal value assigned to the var to be the type specified in the suffix
+* _binary_ - binary number with prefix "0b"
+* _octal_ - octal number with prefix "0"
+* _hexadecimal_ - hex number with prefix "0x"
+* _char literals_ - char is translated from ascii value to numeric for numeric prims
+  * numeric val for char type is translated to ascii char value
+* _unicode_ - prefixed with \u
+* underscores can be used to improve readability as long as they are not at the beginning, end, or up against a modifier
+
+### Initialization
+* Java default initializes global prims to values of 0 for numerics, false for bool
+* Java requires local prims to be initialized before use
+* if the var is **unused**, no compiler error will be thrown
+* _partial initialization_ - init does not occur in all possible condition outcomes and accessed outside the condition
+  * Init in an _if_ statement block without a corresponding else block
+  * Init in a _switch_ statement, but not the default statement
+  * Init in a _while_ loop (note that do/while loop is okay since it is always exec at least once)
