@@ -33,5 +33,21 @@ public class FooBar {
                 r = 3;
         }
         System.out.println("r is " + r); // r is now fully init, since all switch outcomes set r
+
+        int s, t = 0;
+        do {
+            s = t++;
+        } while (t < 1);
+        System.out.println("s is " + s);
+
+        // while statement satisfies compiler's full init
+        // check only if condition is statically known
+        int u, v = 0;
+//        while(v < 1) { fails since not guaranteed
+        while(true) {
+            u = ++v;
+            break;
+        }
+        System.out.println("u is " + u);
     }
 }

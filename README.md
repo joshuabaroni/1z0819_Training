@@ -143,16 +143,16 @@
 * byte, char, short, int, and long are in 2's complement format (leftmost bit is +/-)
 * char is the only unsigned prim
 
-| Primitive Data Type | Storage in bits(width) | Range of Values | Wrapper
-| --- | --- | --- | ---
-| byte | 8 | -128:127 | Byte
-| char | 16 | \u0000:\uFFFF | Character
-| short | 16 | (-2<sup>15</sup>):(2<sup>15</sup> - 1) | Short
-| int* | 32 | (-2<sup>31</sup>):(2<sup>31</sup> - 1) | Integer
-| long | 64 | (-2<sup>63</sup>):(2<sup>63</sup> - 1) | Long
-| float | 32 | ~3.4028235<sup>38</sup> | Float
-| double* | 64 | ~1.7976931348623157<sup>308</sup> | Double
-| boolean | 1 | true, false | Boolean
+| Primitive Data Type | Storage in bits(width) | Range of Values                        | Wrapper   |
+|---------------------|------------------------|----------------------------------------|-----------|
+| byte                | 8                      | -128:127                               | Byte      |
+| char                | 16                     | \u0000:\uFFFF                          | Character |
+| short               | 16                     | (-2<sup>15</sup>):(2<sup>15</sup> - 1) | Short     |
+| int*                | 32                     | (-2<sup>31</sup>):(2<sup>31</sup> - 1) | Integer   |
+| long                | 64                     | (-2<sup>63</sup>):(2<sup>63</sup> - 1) | Long      |
+| float               | 32                     | ~3.4028235<sup>38</sup>                | Float     |  
+| double*             | 64                     | ~1.7976931348623157<sup>308</sup>      | Double    |
+| boolean             | 1                      | true, false                            | Boolean   |
 
 ### Declaring Primitive Types
 * _declaration_ - consists of data types and variable names
@@ -164,23 +164,23 @@
 * A value containing a decimal point is assumed to be 64bit double
 * 'A'.class is Character, but "A".class is String
 
-| Literal Types | Valid Literal Examples | Declared Type
-| --- | --- | ---
-| numeric | 400 | 32 bit signed int prim
-| numeric | -6000 | 32 bit signed int prim
-| numeric | 5280L or 5280l | declared long
-| numeric | 0xC0FFEE | base<sub>16</sub> prim
-| numeric | 010 | base<sub>8</sub> prim
-| numeric | 5.077 | assumed double
-| numeric | 5.077F or 5.077f | declared float
-| numeric | 3_000_000 | integer, Java 7 added to improve readability
-| numeric | 0b00100001 | binary literal introduced in Java 7
-| char | '\u0041' | unicode for 'A'
-| char | 65 | decimal value for letter 'A'
-| char | 'A' | --
-| char | '\n' | (escape chars with '\\' - represents line feed)
-| boolean | true | --
-| boolean | false | --
+| Literal Types | Valid Literal Examples | Declared Type                                   |
+|---------------|------------------------|-------------------------------------------------|
+| numeric       | 400                    | 32 bit signed int prim                          |
+| numeric       | -6000                  | 32 bit signed int prim                          |
+| numeric       | 5280L or 5280l         | declared long                                   |
+| numeric       | 0xC0FFEE               | base<sub>16</sub> prim                          |
+| numeric       | 010                    | base<sub>8</sub> prim                           |
+| numeric       | 5.077                  | assumed double                                  |
+| numeric       | 5.077F or 5.077f       | declared float                                  |
+| numeric       | 3_000_000              | integer, Java 7 added to improve readability    |
+| numeric       | 0b00100001             | binary literal introduced in Java 7             |
+| char          | '\u0041'               | unicode for 'A'                                 |
+| char          | 65                     | decimal value for letter 'A'                    |
+| char          | 'A'                    | --                                              |
+| char          | '\n'                   | (escape chars with '\\' - represents line feed) |
+| boolean       | true                   | --                                              |
+| boolean       | false                  | --                                              |
 
 ### Suffix and Prefix Modifiers
 * in some cases, numeric literals will have a suffix
@@ -202,3 +202,34 @@
   * Init in an _if_ statement block without a corresponding else block
   * Init in a _switch_ statement, but not the default statement
   * Init in a _while_ loop (note that do/while loop is okay since it is always exec at least once)
+
+| Type of Init or Assignment                                                                                                                | Example                                                                                                                             | Notes                                                                                                                                |
+|-------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| To a literal as described in the previous section                                                                                         | int i1 = 10; // decimal integer <br/> int i2 = 012; // octal <br/> int i3 = 0xA; // hexadecimal <br/> int i4 = 0b00001010 // binary | All of these set the decimal representation of 10 to an int prim type                                                                |
+| To a variable of same data type                                                                                                           | int i1 = 10;<br/>int i2 = i1;                                                                                                       | Assigned to another int variable                                                                                                     |
+| To a variable of smaller data type                                                                                                        | short s1 = 10;<br/>int i2 = s1;                                                                                                     | Assigned to a smaller prim data variable                                                                                             | 
+| To a wrapper class which will automatically do casting as long as wrapper's data type size is <= other variable's declared data type size | Short s1Wrap = 10;<br/>Integer i1Wrap = 10;<br/>int i1 = i1Wrap, i2 = s1Wrap;                                                       | Assigned to a wrapper class for a smaller primitive data type                                                                        |
+| To a casted variable or literal                                                                                                           | int i1 = (int) 100L;                                                                                                                | 100L is a literal for a long. The cast takes preference over the literal suffix                                                      |
+| To an instance variable of an object or class as long as the above rules apply and access modifier allows it                              | Foo foo = new Foo();<br/>int i1 = foo.myInteger;                                                                                    | Assume foo class exists and has a myInteger instance variable attr                                                                   |
+| To a return value of a method in scope, as long as the above rules apply                                                                  | Foo foo = new Foo();<br/>int i1 = foo.getMethod();                                                                                  | Assume foo class exists and has a method getMethod() which returns an int or wrapper int or any data type as described in this table |
+
+### Data Type Mismatches
+* _narrowing_ - assign a larger prim data literal or variable to a smaller one
+* _widening_ - assign a smaller prim data literal or variable to a larger one
+  * compiler is more forgiving on widening attempts than narrowing attempts
+* Every numeric val literal that does not contain a decimal point is a 32bit _int_ by default
+* Every numeric literal with a decimal defaults to _double_
+* There are times when you want to force the compiler to overlook its narrowing and widening checks
+  * you have the knowledge of the actual values occurring in the program during execution
+* _casting_ - reference the type you want to be widened or narrowed to in parenthesis preceding the var or val that is to be converted
+  * cast to a larger sized var (widening) - this is the most common case and poses less risk since there is no risk of loss of value
+  * cast to a smaller var (narrowing)
+    * case: perhaps you want to use a method that requires a smaller var type
+    * assumption: you know your val will not exceed the smaller variable range at the time of execution
+* The problem with casting is that if your value does not fall into the valid value range, your data may **underflow** or **overflow**
+  * _underflow_ - defining or casting a value < MIN_VALUE for the data type
+  * _overflow_ - defining or casting a value > MAX_VALUE for the data type
+* In some cases you might want to cast from a more precise data type (float) to a less precise one (int)
+  * This truncates the number to a whole number
+* You can always force the compiler's hand and use a cast, but you should always ask yourself why you need a cast and evaluate the risks associated with casting and try to code in defense of those risks
+* 
