@@ -232,4 +232,16 @@
 * In some cases you might want to cast from a more precise data type (float) to a less precise one (int)
   * This truncates the number to a whole number
 * You can always force the compiler's hand and use a cast, but you should always ask yourself why you need a cast and evaluate the risks associated with casting and try to code in defense of those risks
-* 
+### Declaring and Initializing Variables
+* Literals with decimal default to double, not float
+* Doubles and floats do **not** overflow, since they are approximated
+* Local variable primitives are not initialized
+* Class static and instance members are initialized
+* Null is **not** a valid value for a primitive data type 
+### Unicode Character Representations
+* The char data type is based on the original Unicode specification, which defined characters as fixed-width 16-bit entities
+* The unicode Standard has since been changed to allow for characters whose representation requires more than 16 bits
+* The range of legal code points is now **U+0000, U+10FFFF, known as Unicode scalar value
+* The java platform uses _UTF-16_ representation in char arrays and in String and String-related classes
+* In this representation, supplementary characters are represented as a pair of char values
+  * Range: (_High Surrogates_ - \uD800-\uDBFF, _Low Surrogates_ - \uDC00-\uDFFF)
