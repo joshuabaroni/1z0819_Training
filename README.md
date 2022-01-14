@@ -36,11 +36,11 @@
   * This is the "\<x\> HAS A \<y\>" feature of OOP
 * Java supports packages_and_imports.a _Single Inheritance Class Structure_ - packages_and_imports.a class can only extend one class/have one parent class in its hierarchy
 ### Types of Inheritance
-| Type of Inheritance                    | Java supports multiple inheritance                                                                 |
-|----------------------------------------|----------------------------------------------------------------------------------------------------|
-| Multiple Inheritance of State          | NO - State is inherited from supertype and classes can only have 1 supertype                       |
+| Type of Inheritance                    | Java supports multiple inheritance                                                                                      |
+|----------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
+| Multiple Inheritance of State          | NO - State is inherited from supertype and classes can only have 1 supertype                                            |
 | Multiple Inheritance of Implementation | NO - Here impl means inheriting method defs from packages_and_imports.a supertype and classes can only have 1 supertype |
-|  Multiple Inheritance of Type          | YES - Java allows classes to extend their types as well as impl other types                        |
+| Multiple Inheritance of Type           | YES - Java allows classes to extend their types as well as impl other types                                             |
 ### Java is Statically Typed
 * _statically typed_ - requires you to declare data types of your vars before you use them
 * _dynamically typed_ - checked at runtime, no prior declaration needed
@@ -245,3 +245,24 @@
 * The java platform uses _UTF-16_ representation in char arrays and in String and String-related classes
 * In this representation, supplementary characters are represented as a pair of char values
   * Range: (_High Surrogates_ - \uD800-\uDBFF, _Low Surrogates_ - \uDC00-\uDFFF)
+### Scope
+* _**scope** of a declaration_ - the region of the program within which the entity declared by the declaration can be referred to using a simple name, assuming it is visible
+* local variables, formal parameters, exception parameters, and local classes can only be referred to using a simple name, not a qualified name
+  * because of this, some declarations are not permitted within the scope of these elements
+* if you **cannot qualify** a variable name in its **current** scope, you **cannot create** another local variable in a more **limited** scope
+
+| scope                           | Qualifier          |
+|---------------------------------|--------------------|
+| Class                           | {DefinedClassType} |
+| Instance                        | this               | 
+| Method                          | none               |
+| Loop                            | none               |
+| Loop Block                      | none               |
+| Block Including Exception Block | none               |
+
+* The best way to quickly see if your local var definition is going to raise a compile error is to ask yourself if you can **qualify** it by its _instance_
+* If you cannot, and it has already been defined in an outer scope, it will cause an error
+* This is especially hard to spot in for loop initialization statements
+* _shadowing_ - a local variable is legally declared, but another declaration that can be qualified is not used or accessed because the local var takes precedence
+* You can define a nested or inner class within a method which seems to break the local var rule we learned
+* 
