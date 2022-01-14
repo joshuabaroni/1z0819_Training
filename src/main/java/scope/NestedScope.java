@@ -5,6 +5,7 @@ public class NestedScope {
         // local variable i declared and initialized
         int i = 10;
         class locallyDefinedClass {
+            // declaration block; runs on instantiation (even if other method is directly called)
             {
                 // i from method scope still visible in nested local class
                 System.out.println("value of i BEFORE loop: " + i);
@@ -32,9 +33,17 @@ public class NestedScope {
                 System.out.println("------------------------");
                 System.out.println("value of i AFTER loop: " + i);
             }
+            {
+                System.out.println("second nested class block");
+            }
+            public void namedBlock() {
+                System.out.println("named block");
+            }
         }
         System.out.println("value of i before local class instantiated " + i);
-        new locallyDefinedClass();
+        // call declaration inside locally defined class
+        new locallyDefinedClass().namedBlock();
         System.out.println("value of i after local class instantiated " + i);
+//        System.out.println(new locallyDefinedClass().getClass());
     }
 }
