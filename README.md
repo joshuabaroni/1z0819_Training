@@ -265,4 +265,51 @@
 * This is especially hard to spot in for loop initialization statements
 * _shadowing_ - a local variable is legally declared, but another declaration that can be qualified is not used or accessed because the local var takes precedence
 * You can define a nested or inner class within a method which seems to break the local var rule we learned
-* 
+### Local variable type inference
+* _'var' keyword_ - a **shorthand** statement to reduce the verbosity of code
+* 'var' is **not**
+  * a data type. The data type must be able to be inferred by the compiler when using it
+  * a keyword. You can use the text 'var' as an identifier
+* Can only be used inside methods for local variables, and the variable type on the right side of the declaration must be inferable by compiler to avoid compilation errors
+* var is **not** to be confused with variable type
+* just because you define a local variable with the var designation, it does not mean it is a variable type
+* the type is inferred by its initialization and cannot be changed
+* all the narrowing/widening rules for the inferred type apply
+* you **cannot** use LVTI for:
+  * class or instance vars
+  * method return types
+  * method params
+  * constructor params
+  * the class name (lowercase 'var')
+* you **can** use LVTI for:
+  * local variables in methods and code blocks
+  * loop variables
+  
+| Valid uses of LVTI (Assuming local vars) | Explanation                                                                                                                           |
+|------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| `var i = 1;`                               | Since the literal 1 is an int, var i is inferred to be an int                                                                         |
+| `var j = 1.0f/2;`                          | j is inferred to be a float                                                                                                           |
+| `short s = 1;<br/>var k = s+;`             | k is inferred to be an int (not a short) since the operator + (which doesn't change the value of 1) forces s to be promoted to an int |
+| `var list = new ArrayList<>();`            | This is ok because ArrayList does not need to be typed to be initialized                                                              |
+| `var myArray = new String[5];`             | This is ok because type is inferred to be an array of String                                                                          |
+
+| Invalid uses of LVTI (Assuming local vars) | Explanation                                                                                  |
+|--------------------------------------------|----------------------------------------------------------------------------------------------|
+| `var i = 1, i = 2;`                        | var cannot be used in compound statement                                                     |
+| `var i,j = 1;`                             | var cannot be used in compound statement                                                     |
+| `var integer`                              | integer here is a variable name and therefore type cannot be inferred without an initializer |
+| `var myObject = null;`                     | var variable cannot be initialized to null, type cannot be inferred                          |
+| `var myArray = {"a", "b"}`                 | This looks legal since array of String, but var variable cannot be init with an array init   |
+
+### Strings
+* A String in java is an object of class java.lang.String and represents an array or series of characters, but is NOT an array of the primitive data type 'char'
+* _interning_ - when a String is created without a constructor (not using 'new') the string is stored in a special area of the heap called the string pool, whose purpose is to maintain a set of unique strings
+* you can manually intern using String.intern()
+* when you assign two variables to the same string literal, these strings are considered equal and the comparator '==' evaluates to true
+* Strings are _immutable_ - they cannot be changed
+* once you create a String with a string literal (for example "Hello") that string remains ("Hello") on the string pool with a single reference to it
+* if you do a string concatenation, you are not changing the current String, but creating a new String object with the concatenated strings added to it
+* Literal strings have their own special area of the heap memory called the string pool
+* any assignment of a literal will refer to the same String in this pool
+* you can force a String to be added to the pool by calling the intern() method on the string object
+* Strings are immutable, any methods that seem to op on a string are actually creating new strings and making pointers to those strings in the string pool
