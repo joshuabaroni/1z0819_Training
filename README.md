@@ -301,7 +301,7 @@
 | `var myObject = null;`                     | var variable cannot be initialized to null, type cannot be inferred                          |
 | `var myArray = {"a", "b"}`                 | This looks legal since array of String, but var variable cannot be init with an array init   |
 
-### Strings
+## Strings
 * A String in java is an object of class java.lang.String and represents an array or series of characters, but is NOT an array of the primitive data type 'char'
 * _interning_ - when a String is created without a constructor (not using 'new') the string is stored in a special area of the heap called the string pool, whose purpose is to maintain a set of unique strings
 * you can manually intern using String.intern()
@@ -313,3 +313,16 @@
 * any assignment of a literal will refer to the same String in this pool
 * you can force a String to be added to the pool by calling the intern() method on the string object
 * Strings are immutable, any methods that seem to op on a string are actually creating new strings and making pointers to those strings in the string pool
+
+| String Creation Method                                                                                                                                                                                                                                                                                    | Examples                                                                                                                                                                                                                                                   |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Assign string literal to a String variable. A string literal is contained in double quotes                                                                                                                                                                                                                | `String s = "hello";`                                                                                                                                                                                                                                      |
+| String constructors (there are several). It is important to note that String constructors for<br/> byte[] char[] and int[] take a second param <br/>which represents the starting index and the third param is a count of elements which <br/>will be copied from the array, raather than an ending index | `String s1 = new String("hello");`<br/> `byte[] bytes = {'a','b','c'}; String s2 = new String(bytes);`<br/>`char[] chars = {'a','b','c'}; String s3 = new String(chars);`<br/>`StringBuilder sb = new StringBuilder("hello"); String s4 = new String(sb);` |
+| String concatenation                                                                                                                                                                                                                                                                                      | `String s5 = "hello" + " world " + getMethodString();`                                                                                                                                                                                                       |
+
+### Creating Strings
+* _inclusive offset_ - you set the value of the new string to some substring of the param string passed, including the character at the start index provided
+* for constructors, the param after the starting index param is not an ending index param, but rather a count of chars to be included at the beginning offset
+* If this count + offset exceeds num chars, we get a runtime error
+* Ex: Hello World -> Wor
+  * `String str = "Hello World"; `
