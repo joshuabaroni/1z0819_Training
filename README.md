@@ -318,7 +318,7 @@
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Assign string literal to a String variable. A string literal is contained in double quotes                                                                                                                                                                                                                | `String s = "hello";`                                                                                                                                                                                                                                      |
 | String constructors (there are several). It is important to note that String constructors for<br/> byte[] char[] and int[] take a second param <br/>which represents the starting index and the third param is a count of elements which <br/>will be copied from the array, raather than an ending index | `String s1 = new String("hello");`<br/> `byte[] bytes = {'a','b','c'}; String s2 = new String(bytes);`<br/>`char[] chars = {'a','b','c'}; String s3 = new String(chars);`<br/>`StringBuilder sb = new StringBuilder("hello"); String s4 = new String(sb);` |
-| String concatenation                                                                                                                                                                                                                                                                                      | `String s5 = "hello" + " world " + getMethodString();`                                                                                                                                                                                                       |
+| String concatenation                                                                                                                                                                                                                                                                                      | `String s5 = "hello" + " world " + getMethodString();`                                                                                                                                                                                                     |
 
 ### Creating Strings
 * _inclusive offset_ - you set the value of the new string to some substring of the param string passed, including the character at the start index provided
@@ -326,3 +326,32 @@
 * If this count + offset exceeds num chars, we get a runtime error
 * Ex: Hello World -> Wor
   * `String str = "Hello World"; `
+### String Concatenation
+* plus operator `+` is overloaded for String to represent the String.concat function
+* When you concat a str to a ref variable, if the ref var is a reference type, the toString() method on the object is called
+* If the variable is a primitive data type, the var is boxed to a wrapper and its toString() method is called
+### Manipulating Strings
+* The index of the first character is always 0 and the index of the last char is (string.length() - 1)
+* Many string methods use a starting and ending index to copy, replace, or search through the string
+* _inclusive_ - the method will use the character at that beginning index
+  * the beginning index for string methods is inclusive
+* _exclusive_ - the method will not use the character at the end index
+  * to use the last character in your string, your ending index would be string.length()
+
+| Comparison       | Text Searches    | Text Manipulation           | Text Transformation               |
+|------------------|------------------|-----------------------------|-----------------------------------|
+| equals           | contains         | concat                      | chars (introduced in Java 9)      |
+| equalsIgnoreCase | equalsIgnoreCase | join (introduced in Java 8) | codePoints (introduced in Java 9) |
+| contentEquals    | endsWith         | replace                     | format                            |
+| compareTo        | indexOf          | replaceAll                  | lines (introduced in Java 11)     |
+| isEmpty          | lastIndexOf      | replaceFirst                | repeat (introduced in Java 11)    |
+| isBlank          | matches          | split                       | strip                             |
+|                  | startsWith       | substring                   | stripLeading                      |
+|                  |                  | subSequence                 | stripTrailing                     |
+|                  |                  |                             | toCharArray                       |
+|                  |                  |                             | toLowerCase                       |
+|                  |                  |                             | toUpperCase                       |
+|                  |                  |                             | trim                              |
+|                  |                  |                             | valueOf                           |
+
+
