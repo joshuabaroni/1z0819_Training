@@ -354,4 +354,19 @@
 |                  |                  |                             | trim                              |
 |                  |                  |                             | valueOf                           |
 
+### StringBuilder
+* StringBuilder objects, unlike strings, are not immutable
+* They are lighter weight memory wise, so when assigning and reassigning or manipulating strings, opt for StringBuilder to save memory
+* Strings should be used unless StringBuilder offers an advantage in terms of simpler code or better performance
+* Ex: concatenation of a large number of strings or dynamic XML/HTML
+* Every StringBuilder has a capacity which is the number of char spaces alloted to it
+* Capacity is automatically extended as additions are made to the StringBuilder object
+* Constructors:
 
+| Constructor                    | Description                                                                                                | Capacity         |
+|--------------------------------|------------------------------------------------------------------------------------------------------------|------------------|
+| StringBuilder()                | Empty StringBuilder Object with default capacity                                                           | 16 (default)     |
+| StringBuilder(CharSequence cs) | StringBuilder Object with same chars as the specified CharSequence plus default capacity trailing elements | cs.length() + 16 |
+| StringBuilder(String s)        | StringBuilder Object with specified initial capacity                                                       | initCapacity     |
+
+* 
