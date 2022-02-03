@@ -21,14 +21,15 @@ public class StringBuilderCreation {
         StringBuilder sb3 = new StringBuilder();
         // Add 26char string at beginning, which
         // exceeds initCapacity of 16
+        // todo when capacity exceeds 16, why is the next capacity set to 34?
         sb3.append("abcdefghijklmnopqrstuvwxyz");
         System.out.println("sb3.length = " + sb3.length());
         System.out.println("sb3.capacity = " + sb3.capacity());
 
-        // you can set initCapacity manually\
+        // you can set initCapacity manually
         StringBuilder sb4 = new StringBuilder(26);
         sb4.append("abcdefghijklmnopqrstuvwxyz");
-        System.out.println("sb4.length = " + sb4);
+        System.out.println("sb4.length = " + sb4.length());
         System.out.println("sb4.capacity = " + sb4.capacity());
     }
 }
