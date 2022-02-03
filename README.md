@@ -287,11 +287,11 @@
   
 | Valid uses of LVTI (Assuming local vars) | Explanation                                                                                                                           |
 |------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
-| `var i = 1;`                               | Since the literal 1 is an int, var i is inferred to be an int                                                                         |
-| `var j = 1.0f/2;`                          | j is inferred to be a float                                                                                                           |
-| `short s = 1;<br/>var k = s+;`             | k is inferred to be an int (not a short) since the operator + (which doesn't change the value of 1) forces s to be promoted to an int |
-| `var list = new ArrayList<>();`            | This is ok because ArrayList does not need to be typed to be initialized                                                              |
-| `var myArray = new String[5];`             | This is ok because type is inferred to be an array of String                                                                          |
+| `var i = 1;`                             | Since the literal 1 is an int, var i is inferred to be an int                                                                         |
+| `var j = 1.0f/2;`                        | j is inferred to be a float                                                                                                           |
+| `short s = 1;<br/>var k = s+;`           | k is inferred to be an int (not a short) since the operator + (which doesn't change the value of 1) forces s to be promoted to an int |
+| `var list = new ArrayList<>();`          | This is ok because ArrayList does not need to be typed to be initialized                                                              |
+| `var myArray = new String[5];`           | This is ok because type is inferred to be an array of String                                                                          |
 
 | Invalid uses of LVTI (Assuming local vars) | Explanation                                                                                  |
 |--------------------------------------------|----------------------------------------------------------------------------------------------|
@@ -369,4 +369,22 @@
 | StringBuilder(CharSequence cs) | StringBuilder Object with same chars as the specified CharSequence plus default capacity trailing elements | cs.length() + 16 |
 | StringBuilder(String s)        | StringBuilder Object with specified initial capacity                                                       | initCapacity     |
 
-* 
+## Operators
+* _unary operator_ - operates on 1 variable
+* _binary operator_ - operates on 2 vars: a left and a right variable
+
+| Category                      | Symbol                               | Simple Description                                                          | Notes                                                                                                                                                                       |
+|-------------------------------|--------------------------------------|-----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Multiplicative Operations     | *<br/>/<br/>%                        | Multiplication<br/>Division<br/>Modulus                                     | Precedence equal among them, group left to right                                                                                                                            |
+| Additive Operators            | +<br/>-                              | Addition<br/>Subtraction                                                    | Precedence equal among them, group left to right                                                                                                                            |
+| Shift Operators               | <<<br/>>><br/>>>>                    | left shift<br/>signed right shift<br/>unsigned right shift                  | The left hand Op of a shift Op is the value to be shifted<br/>The right hand Op specified the shift distance in bits<br/>Precedence equal among them, grouped left to right |
+| Relational Operators          | <<br/><=<br/>><br/>>=<br/>instanceof | less than<br/>less than or equal<br/>greater than<br/>greater than or equal | Precedence equal among them, group left to right                                                                                                                            |
+| Equality Operators            | ==<br/>!=                            | equals<br/>not equals                                                       |                                                                                                                                                                             |
+| Bitwise and Logical Operators | &<br/>^<br/>&#124;                   | AND<br/>XOR<br/>NOR                                                         | These operators have different precedence, with & having the highest precedence and &#124; the lowest precedence                                                            |                                                                                                                                                                             |
+
+* Numeric promotion
+  * For a _unary operator_ that is not the pre/post dec Op, if the type of Op is smaller than an int, the Op will automatically be promoted to an int
+  * For a _binary operator_, both Ops are promoted to int if they are smaller than an int, but if any of the Ops >intCapacity it is promoted to the smallest type that can hold it
+    * This does not occue, however, for compound assignment operators (i.e. int i = j = k = Integer.MAX_VALUE << 1)
+  * Any Ops on numeric values will never result in an Op smaller than an int
+  * 
